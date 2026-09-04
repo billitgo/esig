@@ -15,6 +15,8 @@ export default defineConfig({
   },
   server: {
     port: 5173,
+    // 监听所有网卡，允许局域网内其他终端访问（http://<本机IP>:5173）
+    host: '0.0.0.0',
     // 开发环境将 /api 请求代理到后端，实现前后端分离联调
     proxy: {
       '/api': {
