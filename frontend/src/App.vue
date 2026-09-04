@@ -47,6 +47,19 @@
         </div>
       </div>
 
+      <!-- 盖章记录 -->
+      <div class="section records">
+        <div class="section-title">盖章记录: 共({{ stamps.length }})条记录</div>
+        <div class="record-list">
+          <div v-for="s in stamps" :key="s.id" class="record-item">
+            <span class="record-page">第{{ s.page }}页</span>
+            <span class="record-time">{{ s.createdAt || '—' }}</span>
+            <button class="record-del" @click="deleteRecord(s.id)">删除</button>
+          </div>
+          <div v-if="stamps.length === 0" class="record-empty">暂无盖章记录</div>
+        </div>
+      </div>
+
       <!-- 骑缝章 -->
       <div class="section">
         <div class="section-title">3. 骑缝章</div>
@@ -69,19 +82,6 @@
         <div class="row">
           <button class="btn small" @click="deleteSelected" :disabled="!selectedStampId">删除选中</button>
           <button class="btn small" @click="undoLast" :disabled="stamps.length === 0">撤销上一枚</button>
-        </div>
-      </div>
-
-      <!-- 盖章记录 -->
-      <div class="section records">
-        <div class="section-title">盖章记录: 共({{ stamps.length }})条记录</div>
-        <div class="record-list">
-          <div v-for="s in stamps" :key="s.id" class="record-item">
-            <span class="record-page">第{{ s.page }}页</span>
-            <span class="record-time">{{ s.createdAt || '—' }}</span>
-            <button class="record-del" @click="deleteRecord(s.id)">删除</button>
-          </div>
-          <div v-if="stamps.length === 0" class="record-empty">暂无盖章记录</div>
         </div>
       </div>
 
