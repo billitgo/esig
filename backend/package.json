@@ -1,0 +1,15 @@
+{
+  "name": "seal-system-backend",
+  "version": "0.1.0",
+  "description": "电子盖章系统后端（前后端分离，预留权限管理）",
+  "type": "module",
+  "main": "src/server.js",
+  "scripts": {
+    "dev": "node --watch src/server.js",
+    "start": "node src/server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2"
+  }
+}
