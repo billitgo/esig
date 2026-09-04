@@ -72,6 +72,19 @@
         </div>
       </div>
 
+      <!-- 盖章记录 -->
+      <div class="section records">
+        <div class="section-title">盖章记录: 共({{ stamps.length }})条记录</div>
+        <div class="record-list">
+          <div v-for="s in stamps" :key="s.id" class="record-item">
+            <span class="record-page">第{{ s.page }}页</span>
+            <span class="record-time">{{ s.createdAt || '—' }}</span>
+            <button class="record-del" @click="deleteRecord(s.id)">删除</button>
+          </div>
+          <div v-if="stamps.length === 0" class="record-empty">暂无盖章记录</div>
+        </div>
+      </div>
+
       <!-- 分页 -->
       <div class="section" v-if="pdfDoc">
         <div class="section-title">页码</div>
@@ -197,11 +210,16 @@ function onPageInput(e) {
 }
 
 // ---- 删除 / 撤销 ----
+/** 按 id 删除一枚章（盖章记录列表的删除按钮） */
+function deleteRecord(id) {
+  stamps.value = stamps.value.filter((s) => s.id !== id);
+  if (selectedStampId.value === id) selectedStampId.value = null;
+}
+
 function deleteSelected() {
   if (!selectedStampId.value) return;
   if (selectedStampId.value === 'cross') return; // 骑缝章对象不通过此按钮删除
-  stamps.value = stamps.value.filter((s) => s.id !== selectedStampId.value);
-  selectedStampId.value = null;
+  deleteRecord(selectedStampId.value);
 }
 
 function undoLast() {

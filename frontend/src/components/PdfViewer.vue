@@ -178,6 +178,13 @@ async function renderCrossPagePreview() {
   fabricCanvas.add(img);
 }
 
+/** 格式化当前时间为 yyyy-MM-dd HH:mm:ss */
+function formatNow() {
+  const d = new Date();
+  const p = (n) => String(n).padStart(2, '0');
+  return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())} ${p(d.getHours())}:${p(d.getMinutes())}:${p(d.getSeconds())}`;
+}
+
 /** 在指定坐标处落一枚章（鼠标单击与空格键共用） */
 async function stampAt(pointer) {
   if (!props.sealDataUrl || !props.sealImageEl) return;
@@ -197,6 +204,7 @@ async function stampAt(pointer) {
     opacity: props.opacity,
     angle: 0,
     url: props.sealDataUrl,
+    createdAt: formatNow(), // 盖章记录时间
   };
 
   const img = await createStampObject(newStamp);
